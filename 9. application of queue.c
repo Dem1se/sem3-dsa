@@ -34,5 +34,5 @@ int main()
     printf("The average waiting time is : %f\n", awt);
     printf("The average turn around time is : %f\n", att);
     getch();
-	return 0;
+    return 0;
 }
