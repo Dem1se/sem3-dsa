@@ -7,7 +7,7 @@ void swap(int *A, int *B)
    *B = temp;
 }
 
-int Partition(int arr[], int start, int end)
+int partition(int arr[], int start, int end)
 {
    int pivot = end;
    int j = start;
@@ -15,26 +15,26 @@ int Partition(int arr[], int start, int end)
    {
       if (arr[i] < arr[pivot])
       {
-         swap(arr[i], arr[j]);
+         swap(&arr[i], &arr[j]);
          ++j;
       }
    }
-   swap(arr[j], arr[pivot]);
+   swap(&arr[j], &arr[pivot]);
    return j;
 }
 
-void Quicksort(int arr[], int start, int end)
+void quicksort(int arr[], int start, int end)
 {
 
    if (start < end)
    {
-      int p = Partition(arr, start, end);
-      Quicksort(arr, start, p - 1);
-      Quicksort(arr, p + 1, end);
+      int p = partition(arr, start, end);
+      quicksort(arr, start, p - 1);
+      quicksort(arr, p + 1, end);
    }
 }
 
-void PrintArray(int arr[], int n)
+void printArray(int arr[], int n)
 {
    for (int i = 0; i < n; ++i)
       printf("%d ", arr[i]);
@@ -47,9 +47,9 @@ int main()
    int n = sizeof(arr) / sizeof(int);
 
    printf("Array Before Sorting:\n");
-   PrintArray(arr, n);
+   printArray(arr, n);
 
-   Quicksort(arr, 0, n - 1);
+   quicksort(arr, 0, n - 1);
    printf("Array After Sorting:\n");
-   PrintArray(arr, n);
+   printArray(arr, n);
 }
