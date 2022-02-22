@@ -17,6 +17,7 @@ void main()
         visited[i] = 0;
     DFS(0);
 }
+
 void DFS(int i)
 {
     int j;
