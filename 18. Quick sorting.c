@@ -9,14 +9,13 @@ void swap(int *A, int *B)
 
 int partition(int arr[], int start, int end)
 {
-   int pivot = end;
-   int j = start;
-   for (int i = start; i < end; ++i)
+   int pivot = end, j = start;
+   for (int i = start; i < end; i++)
    {
       if (arr[i] < arr[pivot])
       {
          swap(&arr[i], &arr[j]);
-         ++j;
+         j++;
       }
    }
    swap(&arr[j], &arr[pivot]);
@@ -25,7 +24,6 @@ int partition(int arr[], int start, int end)
 
 void quicksort(int arr[], int start, int end)
 {
-
    if (start < end)
    {
       int p = partition(arr, start, end);
