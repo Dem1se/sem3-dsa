@@ -3,24 +3,25 @@
 
 struct node
 {
-    int element;
+    int value;
     struct node *next;
 };
 
 typedef struct node *llist;
 llist init();
 llist insert(llist L, int ch, int pos);
-llist delete (llist L, int pos);
+llist delete(llist L, int pos);
 llist find(llist L, int ch);
 int findkth(llist L, int pos);
 void printlist(llist L);
 void deletelist(llist L);
+void reverse(llist L);
 llist init()
 {
     llist L;
     /* Create the dummy node */
     L = (struct node *)malloc(sizeof(struct node));
-    L->element = -1;
+    L->value = -1;
     L->next = NULL;
     return L;
 }
@@ -46,12 +47,12 @@ llist insert(llist L, int ch, int pos)
         return L;
     }
     n = (struct node *)malloc(sizeof(struct node));
-    n->element = ch;
+    n->value = ch;
     n->next = p->next;
     p->next = n;
     return L;
 }
-llist delete (llist L, int pos)
+llist delete(llist L, int pos)
 {
     int i;
     llist p, temp;
@@ -83,7 +84,7 @@ llist find(llist L, int ch)
     p = L->next;
     while (p != NULL)
     {
-        if (p->element == ch)
+        if (p->value == ch)
             return p;
         p = p->next;
     }
@@ -105,7 +106,7 @@ int findkth(llist L, int pos)
         printf("Invalid index ");
         return -1;
     }
-    return p->element;
+    return p->value;
 }
 void printlist(llist L)
 {
@@ -113,7 +114,7 @@ void printlist(llist L)
     p = L->next;
     while (p != NULL)
     {
-        printf("%d", p->element);
+        printf("%d", p->value);
         p = p->next;
     }
 }
@@ -128,15 +129,16 @@ void deletelist(llist L)
         p = p->next;
         free(temp);
     }
-    21
 }
 void main()
 {
-    clrscr();
     typedef struct node *llist;
     int n, pos, ch;
     llist L;
     L = init();
+    insert(L, 1, 0);
+    insert(L, 2, 1);
+    insert(L, 3, 2);
     char i;
     do
     {
@@ -186,6 +188,12 @@ void main()
             deletelist(L);
             break;
         }
+        case 7:
+        {
+            reverse(L);
+            printlist(L);
+            break;
+        }
         default:
         {
             printf("\nInvalid choice");
@@ -195,4 +203,17 @@ void main()
         printf("\nDo you want to continue?<< Enter y if yes >> ");
         scanf("%s", &i);
     } while (i == 'y');
+}
+
+void reverse(llist L)
+{
+    llist cur = L->next, prev = NULL, actual_next;
+    while (cur)
+    {
+        actual_next = cur->next;
+        cur->next = prev;
+        prev = cur;
+        cur = actual_next;
+    }
+    L->next = prev;
 }
